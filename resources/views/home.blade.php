@@ -18,7 +18,7 @@
   </div>
 
   {{-- @if(count($posts)) --}}
-  <Posts />
+  <Posts :auth="{{ json_encode($auth) }}" />
   {{-- @else
   <div class="flex justify-center ">
     <img class="w-1/2 my-12" src="/images/empty-state.svg" alt="No Post">

@@ -50578,21 +50578,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['post'],
   data: function data() {
     return {
-      title: ''
+      title: '',
+      content: ''
     };
+  },
+  watch: {
+    post: {
+      immediate: true,
+      handler: function handler(current) {
+        if (current) {
+          this.title = current.title;
+          this.content = current.content;
+        }
+      }
+    }
   },
   methods: {
     save: function save(data) {
       this.$refs.editor.save();
     },
+    request: function request(response) {
+      if (this.post) {
+        return axios.patch("/post/".concat(this.post.id), {
+          title: this.title,
+          content: response
+        });
+      } else {
+        return axios.post('/post', {
+          title: this.title,
+          content: response
+        });
+      }
+    },
     onSave: function onSave(response) {
-      axios.post('/post', {
-        title: this.title,
-        content: response
-      }).then(function () {
+      this.request(response).then(function () {
         window.location.href = '/';
       })["catch"](function (_ref) {
         var errors = _ref.response.data.errors;
@@ -50651,7 +50675,7 @@ var render = function() {
         _c("editor", {
           ref: "editor",
           staticClass: "bg-white",
-          attrs: { autofocus: "" },
+          attrs: { "init-data": _vm.content, autofocus: "" },
           on: { save: _vm.onSave }
         })
       ],
@@ -53731,21 +53755,28 @@ var render = function() {
           _vm._v("PUBLISHED ON " + _vm._s(_vm.date))
         ]),
         _vm._v(" "),
-        _c("span", [
-          _c("a", { staticClass: "uppercase mx-1", attrs: { href: "#" } }, [
-            _vm._v("Edit")
-          ]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "uppercase mx-1 text-red-500 hover:text-red-700",
-              attrs: { href: "#" },
-              on: { click: _vm.onDelete }
-            },
-            [_vm._v("Delete")]
-          )
-        ])
+        _vm.auth
+          ? _c("span", [
+              _c(
+                "a",
+                {
+                  staticClass: "uppercase mx-1",
+                  attrs: { href: "/post/" + _vm.post.id + "/edit" }
+                },
+                [_vm._v("Edit")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "uppercase mx-1 text-red-500 hover:text-red-700",
+                  attrs: { href: "#" },
+                  on: { click: _vm.onDelete }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("h2", { staticClass: "my-2" }, [
@@ -53836,7 +53867,7 @@ var render = function() {
         : _vm._l(_vm.posts, function(post, index) {
             return _c("post-card", {
               key: index,
-              attrs: { post: post },
+              attrs: { post: post, auth: _vm.auth },
               on: { refetch: _vm.fetchPosts }
             })
           })
@@ -53872,7 +53903,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['auth'],
   data: function data() {
     return {
       posts: [],
@@ -53919,7 +53952,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['post'],
+  props: ['post', 'auth'],
   computed: {
     date: function date() {
       if (this.post) {

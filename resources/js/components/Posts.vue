@@ -4,6 +4,7 @@
   <post-card v-else
     v-for="(post, index) in posts"
     :post="post"
+    :auth="auth"
     :key="index"
     @refetch="fetchPosts"
   />
@@ -12,6 +13,8 @@
 
 <script>
 export default {
+  props: ['auth'],
+
   data () {
     return {
       posts: [],

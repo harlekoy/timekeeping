@@ -4,6 +4,7 @@
     <input v-model="title" class="bg-transparent font-serif text-4xl my-4 w-full outline-none" type="text" placeholder="Title">
     <editor
       class="bg-white"
+      :init-data="content"
       autofocus
       ref="editor"
       @save="onSave"
@@ -18,9 +19,24 @@
 
 <script>
 export default {
+  props: ['post'],
+
   data () {
     return {
       title: '',
+      content: ''
+    }
+  },
+
+  watch: {
+    post: {
+      immediate: true,
+      handler (current) {
+        if (current) {
+          this.title = current.title
+          this.content = current.content
+        }
+      }
     }
   },
 
@@ -29,11 +45,22 @@ export default {
       this.$refs.editor.save()
     },
 
+    request (response) {
+      if (this.post) {
+        return axios.patch(`/post/${this.post.id}`, {
+          title: this.title,
+          content: response,
+        })
+      } else {
+        return axios.post('/post', {
+          title: this.title,
+          content: response,
+        })
+      }
+    },
+
     onSave (response) {
-      axios.post('/post', {
-        title: this.title,
-        content: response,
-      }).then(() => {
+      this.request(response).then(() => {
         window.location.href = '/'
       }).catch(({ response: { data: { errors } } }) => {
         let key = _.head(_.keys(errors))

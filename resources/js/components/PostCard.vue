@@ -2,8 +2,8 @@
 <div class="bg-white w-2/3 p-4 my-4 rounded shadow-md">
   <div class="flex justify-between">
     <small class="font-sans uppercase">PUBLISHED ON {{ date }}</small>
-    <span>
-      <a class="uppercase mx-1" href="#">Edit</a>
+    <span v-if="auth">
+      <a class="uppercase mx-1" :href="`/post/${post.id}/edit`">Edit</a>
       <a @click="onDelete" class="uppercase mx-1 text-red-500 hover:text-red-700" href="#">Delete</a>
     </span>
   </div>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  props: ['post'],
+  props: ['post', 'auth'],
 
   computed: {
     date () {
