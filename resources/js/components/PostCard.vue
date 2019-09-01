@@ -7,7 +7,7 @@
       <a @click="onDelete" class="uppercase mx-1 text-red-500 hover:text-red-700" href="#">Delete</a>
     </span>
   </div>
-  <h2 class="my-2"><a href="#" class="hover:no-underline font-sans">{{ post.title }}</a></h2>
+  <h2 class="my-2"><a :href="`/post/${post.id}`" class="hover:no-underline font-sans">{{ post.title }}</a></h2>
   <p class="font-serif">{{ post.description }}</p>
 </div>
 </template>

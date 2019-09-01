@@ -53782,7 +53782,10 @@ var render = function() {
       _c("h2", { staticClass: "my-2" }, [
         _c(
           "a",
-          { staticClass: "hover:no-underline font-sans", attrs: { href: "#" } },
+          {
+            staticClass: "hover:no-underline font-sans",
+            attrs: { href: "/post/" + _vm.post.id }
+          },
           [_vm._v(_vm._s(_vm.post.title))]
         )
       ]),
