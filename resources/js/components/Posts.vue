@@ -1,13 +1,16 @@
 <template>
 <div class="flex justify-center flex-wrap">
   <loading v-if="load" />
-  <post-card v-else
-    v-for="(post, index) in posts"
-    :post="post"
-    :auth="auth"
-    :key="index"
-    @refetch="fetchPosts"
-  />
+  <div class="flex flex-wrap justify-center" v-else>
+      <empty-state v-if="!posts.length"/>
+      <post-card v-else
+        v-for="(post, index) in posts"
+        :post="post"
+        :auth="auth"
+        :key="index"
+        @refetch="fetchPosts"
+      />
+  </div>
 </div>
 </template>
 
