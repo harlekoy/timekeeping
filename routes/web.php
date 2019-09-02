@@ -13,6 +13,14 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource('post', 'PostController');
+Route::resource('post', 'PostController', [
+    'only' => ['index', 'show']
+]);
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('post', 'PostController', [
+        'only' => ['store', 'update', 'destroy'],
+    ]);
+});
 
 Auth::routes();

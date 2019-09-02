@@ -35,7 +35,7 @@ class Post extends Model
     {
         $content = array_map(function ($block) {
             return array_get($block, 'data.text');
-        }, $this->content['blocks']);
+        }, $this->content['blocks'] ?? []);
 
         $description = implode($content, ' ');
 
