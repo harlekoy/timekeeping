@@ -76228,12 +76228,16 @@ var render = function() {
               [
                 _vm._v(
                   "\n                " +
-                    _vm._s(attendance.in.time.format("dddd"))
+                    _vm._s(attendance.in && attendance.in.time.format("dddd"))
                 ),
                 _c("br"),
                 _vm._v(" "),
                 _c("small", { staticClass: "text-gray-600" }, [
-                  _vm._v(_vm._s(attendance.in.time.format("MMM DD, YYYY")))
+                  _vm._v(
+                    _vm._s(
+                      attendance.in && attendance.in.time.format("MMM DD, YYYY")
+                    )
+                  )
                 ])
               ]
             ),
@@ -76244,17 +76248,22 @@ var render = function() {
                 staticClass: "px-6 py-3 border-b border-20 text-90 font-normal"
               },
               [
-                _vm._v(_vm._s(attendance.in.time.format("hh:mm A"))),
+                _vm._v(
+                  _vm._s(attendance.in && attendance.in.time.format("hh:mm A"))
+                ),
                 _c("br"),
                 _c(
                   "small",
                   {
                     staticClass: "text-gray-600",
-                    attrs: { title: attendance.in.ip_address }
+                    attrs: { title: attendance.in && attendance.in.ip_address }
                   },
                   [
                     _vm._v(
-                      _vm._s(attendance.in.alias || attendance.in.ip_address)
+                      _vm._s(
+                        attendance.in &&
+                          (attendance.in.alias || attendance.in.ip_address)
+                      )
                     )
                   ]
                 )
@@ -76279,7 +76288,7 @@ var render = function() {
                   "small",
                   {
                     staticClass: "text-gray-600",
-                    attrs: { title: attendance.out.ip_address }
+                    attrs: { title: _vm.get(attendance, "out.ip_address") }
                   },
                   [
                     _vm._v(

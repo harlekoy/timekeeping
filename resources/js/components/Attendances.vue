@@ -24,11 +24,11 @@
         </tr>
         <tr v-for="(attendance, index) in attendances">
             <td class="px-6 py-3 border-b border-20 text-90 font-normal">
-                {{ attendance.in.time.format('dddd') }}<br>
-                <small class="text-gray-600">{{ attendance.in.time.format('MMM DD, YYYY') }}</small>
+                {{ attendance.in && attendance.in.time.format('dddd') }}<br>
+                <small class="text-gray-600">{{ attendance.in && attendance.in.time.format('MMM DD, YYYY') }}</small>
             </td>
-            <td class="px-6 py-3 border-b border-20 text-90 font-normal">{{ attendance.in.time.format('hh:mm A') }}<br><small class="text-gray-600" :title="attendance.in.ip_address">{{ attendance.in.alias || attendance.in.ip_address }}</small></td>
-            <td class="px-6 py-3 border-b border-20 text-90 font-normal">{{ attendance.out ? attendance.out.time.format('hh:mm A') : '--' }}<br><small class="text-gray-600" :title="attendance.out.ip_address">{{ attendance.out ? attendance.out.alias || attendance.out.ip_address : '&nbsp;' }}</small></td>
+            <td class="px-6 py-3 border-b border-20 text-90 font-normal">{{ attendance.in && attendance.in.time.format('hh:mm A') }}<br><small class="text-gray-600" :title="attendance.in && attendance.in.ip_address">{{ attendance.in && (attendance.in.alias || attendance.in.ip_address) }}</small></td>
+            <td class="px-6 py-3 border-b border-20 text-90 font-normal">{{ attendance.out ? attendance.out.time.format('hh:mm A') : '--' }}<br><small class="text-gray-600" :title="get(attendance, 'out.ip_address')">{{ attendance.out ? attendance.out.alias || attendance.out.ip_address : '&nbsp;' }}</small></td>
             <td class="px-6 py-3 border-b border-20 text-90 font-normal">
                 <div class="w-32">
                     <div class="shadow-sm w-full bg-gray-100 rounded mt-2">

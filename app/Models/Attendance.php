@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Notifications\TimedIn;
+use App\Notifications\TimedOut;
 use EditorJS\EditorJS;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -21,6 +23,27 @@ class Attendance extends Model
         'location',
         'notes',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::created(function ($model) {
+            switch ($model->type) {
+                case 'in':
+                    $model->user->notify(new TimedIn($model));
+                    break;
+                case 'out':
+                    $model->user->notify(new TimedOut($model));
+                    break;
+            }
+        });
+    }
 
     /**
      * Get IP Address alias.

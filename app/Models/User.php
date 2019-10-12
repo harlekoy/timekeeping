@@ -37,4 +37,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin'          => 'boolean',
     ];
+
+    /**
+     * Specify Slack Webhook URL to route notifications to.
+     *
+     * @return string
+     */
+    public function routeNotificationForSlack()
+    {
+        return env('SLACK_WEBHOOK_URL');
+    }
 }
