@@ -13,12 +13,12 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource('post', 'PostController', [
+Route::resource('attendances', 'AttendanceController', [
     'only' => ['index', 'show']
 ]);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('post', 'PostController', [
+    Route::resource('attendances', 'AttendanceController', [
         'only' => ['store', 'update', 'destroy'],
     ]);
 });

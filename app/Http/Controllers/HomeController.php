@@ -15,7 +15,6 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'posts' => Post::get(),
             'auth' => auth()->user(),
         ]);
     }

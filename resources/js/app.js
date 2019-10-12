@@ -21,6 +21,7 @@ Vue.component('post-card', require('./components/PostCard.vue'));
 Vue.component('posts', require('./components/Posts.vue'));
 Vue.component('loading', require('./components/Loading.vue'));
 Vue.component('empty-state', require('./components/EmptyState.vue'));
+Vue.component('attendances', require('./components/Attendances.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -23,6 +23,21 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+window.axios.interceptors.response.use(response => response, error => {
+    const { status, data: { message } } = error.response
+
+    switch (status) {
+        case 401:
+        fail({
+            text: message
+        })
+
+        setTimeout(() => window.location.replace('login'), 1000)
+        break;
+    }
+
+    return Promise.reject(error)
+})
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
