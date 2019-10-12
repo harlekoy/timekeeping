@@ -22,10 +22,6 @@ class CreateAttendancesTable extends Migration
             $table->string('location')->nulable();
             $table->string('notes')->nulable();
             $table->timestamps();
-
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
         });
     }
 
