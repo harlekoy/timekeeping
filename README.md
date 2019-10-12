@@ -1,7 +1,2 @@
-# figured-blog
+# Prophet timekeeping
 
-To seed `posts` data just run
-
-```
-php artisan db:seed 
-```
