@@ -49,11 +49,12 @@ class TimedIn extends Notification implements ShouldQueue
         return (new SlackMessage)
             ->content('User timed in!')
             ->attachment(function ($attachment) use ($user) {
-                $attachment->fields([
+                $attachment->fields(array_filter([
                     'Name'       => $user->name,
                     'IP Address' => $this->attendance->ip_address,
                     'Time'       => $this->attendance->time->toDayDateTimeString(),
-                ]);
+                    'Location'   => $this->attendance->ip->name ?? null,
+                ]));
             });
     }
 }
