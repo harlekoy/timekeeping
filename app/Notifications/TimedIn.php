@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
-class TimedIn extends Notification
+class TimedIn extends Notification implements ShouldQueue
 {
     use Queueable;
 

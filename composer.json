@@ -13,6 +13,7 @@
         "codex-team/editor.js": "dev-master",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
+        "laravel/horizon": "^3.4",
         "laravel/nova": "*",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^1.0"
