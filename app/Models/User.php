@@ -47,4 +47,14 @@ class User extends Authenticatable
     {
         return env('SLACK_WEBHOOK_URL');
     }
+
+    /**
+     * Get attendances.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
 }
